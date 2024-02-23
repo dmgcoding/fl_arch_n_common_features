@@ -1,3 +1,4 @@
+import 'package:flcp_s2/app/blocs/theme/theme_cubit.dart';
 import 'package:flcp_s2/l10n/l10n.dart';
 import 'package:flcp_s2/app/blocs/locale/locale_cubit.dart';
 import 'package:flcp_s2/pages/counter/counter.dart';
@@ -9,8 +10,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LocaleCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => LocaleCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ThemeCubit(),
+        ),
+      ],
       child: const _App(),
     );
   }
@@ -22,12 +30,19 @@ class _App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LocaleCubit, Locale>(
-      builder: (context, state) {
-        return MaterialApp(
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          locale: state,
-          home: const CounterPage(),
+      builder: (context, locale) {
+        return BlocBuilder<ThemeCubit, Brightness>(
+          builder: (context, brightness) {
+            return MaterialApp(
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: locale,
+              theme: ThemeData(
+                brightness: brightness,
+              ),
+              home: const CounterPage(),
+            );
+          },
         );
       },
     );
