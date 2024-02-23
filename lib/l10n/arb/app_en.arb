@@ -1,0 +1,9 @@
+{
+    "@@locale": "en",
+    "counter": "Counter",
+    "@counter": {
+        "description": "Text shown in the AppBar of the Counter Page"
+    },
+    "helloWorld":"Hello World",
+    "changeLanguage":"Change language"
+}
