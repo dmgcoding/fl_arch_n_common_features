@@ -1,0 +1,9 @@
+{
+    "@@locale": "es",
+    "counter": "Contador",
+    "@counter": {
+        "description": "Texto mostrado en la AppBar de la página del contador"
+    },
+    "helloWorld":"Hola munda",
+    "changeLanguage":"Cambiar idioma"
+}
